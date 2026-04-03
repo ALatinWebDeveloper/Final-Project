@@ -111,8 +111,8 @@ body {
     background-color: #ECECEC;
     display: grid;
     grid-template-columns: 65% 30%;
-    grid-template-rows: 10% 85%;
-    gap: 5%;
+    grid-template-rows: auto 99%;
+    gap: 100px;
 }
 
 header {
@@ -157,7 +157,7 @@ main {
 
 #pokedex {
     display: flex;
-    gap: 5%;
+    gap: 50px 5%;
     flex-wrap: wrap;
 }
 
@@ -172,11 +172,11 @@ main {
 
     .favorite-icon {
         width: 40px;
-        margin-left: 85%;
+        float: right;
     }
 
     img {
-        width: 80%;
+        width: 100%;
         height: auto;
         border-radius: 10px;
     }
@@ -189,6 +189,9 @@ main {
 }
 
 #pmk_profile {
+    position: fixed;
+    width: 30%;
+    left: 66%;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -199,6 +202,7 @@ main {
     padding: 20px;
     grid-area: 2 / 2;
     justify-content: center;
+    height: fit-content;
 
     .profile_header {
         width: 90%;
