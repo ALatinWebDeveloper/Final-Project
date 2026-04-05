@@ -8,7 +8,7 @@ const apiUrl = "https://pokeapi.co/api/v2/pokemon/";
             .catch(error => console.error("Error fetching data:", error));
     }
 
-export function renderPokeCard(pokemon) {
+export async function renderPokeCard(pokemon) {
     let tipo = pokemon.types;
     console.log(tipo);
 

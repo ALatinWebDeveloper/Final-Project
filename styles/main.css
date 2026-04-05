@@ -9,12 +9,22 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.hide
+{
+    display: none;
+}
+
+.show
+{
+    display: flex;
+}
+
 /*Pokemon types css*/
 .pkm_type {
     display: inline-block;
     padding: 5px 10px;
     margin: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 1.1rem;
     font-weight: bold;
 }
@@ -110,9 +120,8 @@ body {
     margin: 2% 5%;
     background-color: #ECECEC;
     display: grid;
-    grid-template-columns: 65% 30%;
-    grid-template-rows: auto 99%;
-    gap: 100px;
+    grid-template: auto 99% / 65% 35%;
+    gap: 50px;
 }
 
 header {
@@ -120,6 +129,7 @@ header {
     justify-content: space-between;
     margin: auto 0;
     grid-area: 1;
+    align-items: center;
 
     input {
         padding: 20px;
@@ -169,14 +179,17 @@ main {
     width: 30%;
     background-color: #FFFF;
     font-size: 1.1rem;
+    box-shadow: #dadada 5px 10px 5px;
 
     .favorite-icon {
         width: 40px;
         float: right;
+        margin: 0;
     }
 
     img {
-        width: 100%;
+        width: 80%;
+        margin: 0 10%;
         height: auto;
         border-radius: 10px;
     }
@@ -190,9 +203,9 @@ main {
 
 #pmk_profile {
     position: fixed;
-    width: 30%;
-    left: 66%;
-    display: flex;
+    width: 31vw;
+    left: 66vw;
+    top: 9vw;
     flex-wrap: wrap;
     align-content: center;
     flex-direction: row;
@@ -204,19 +217,35 @@ main {
     justify-content: center;
     height: fit-content;
 
-    .profile_header {
-        width: 90%;
+    p, .weakness {
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        margin: 0 10px;
     }
 
     h3 {
-        margin: 20px 0 10px 0;
+        margin: 10px 0 5px 0;
+        font-size: 1.1rem;
+    }
+
+    .profile_header {
+        width: 90%;
+        height: 50px;
+    }
+
+    .profile_body {
+        width: 100%;
     }
 
     .prof_img {
         width: 200px;
         height: auto;
         border-radius: 10px;
-        top: 10px;
+        position: fixed;
+        bottom: 36vw;
+        right: 13vw;
     }
 
     .gender {
@@ -259,88 +288,73 @@ main {
         margin: 10px 0;
     }
 
-    p {
-        font-size: 1.2em;
-        margin-bottom: 10px;
+    .description {
+        font-weight: normal;
+        background-color: unset;
     }
 
-    .ability
-        {
-            background-color: var(--main-bg-color);
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 5px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
+    .ability {
+        background-color: var(--main-bg-color);
+        display: inline-block;
+        width: 44%;
+    }
 
-        .pkm_carac {
-            display: grid;
-            gap: 10px;
-            grid-template-columns: 1fr 1fr;
-            margin: 10px;
+    .pkm_carac {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 0 10px;
+    }
+    
+    .weakness {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--main-bg-color);
+        border-radius: 20px;
+        padding: 5px;
+        img {
+            margin: 0 5px;
         }
-        
-        .weakness {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--main-bg-color);
-            border-radius: 20px;
-            margin: 10px 0;
-            padding: 7px;
+    }
+    .feature img {
+        width: 29px;
+    }
 
-            img {
-                margin: 0 5px;
-            }
+    .feature p, .evolution p {
+        background-color: var(--main-bg-color);
+    }
+    .pkm_carac p {
+        grid-area: 2;
+    }
+    .stats {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .stat {
+        background-color: var(--main-bg-color);
+        border-radius: 40px;
+        padding: 5px;
+        h4 {
+            background-color: #47b5ff;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 1rem;
         }
-
-        .feature img {
-            width: 29px;
-        }
-
-        .pkm_carac p {
-            background-color: var(--main-bg-color);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-weight: 500;
-            grid-area: 2;
-            margin: 10px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-
-        .stat {
-            background-color: var(--main-bg-color);
-            border-radius: 40px;
+        p {
+            margin: 0;
             padding: 5px;
-
-            h4 {
-                background-color: #47b5ff;
-                padding: 10px;
-                border-radius: 50%;
-            }
-
-            p {
-                margin: 0;
-            }
         }
-
-        .evolution {
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            margin-bottom: 50px;
-
-            img {
-                width: 50px;
-                margin: 10px;
-            }
+    }
+    .evolution {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        img {
+            width: 50px;
+            margin: 10px;
         }
+    }
 }
 
 footer{
