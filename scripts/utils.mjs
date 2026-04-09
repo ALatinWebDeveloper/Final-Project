@@ -1,32 +1,48 @@
-const apiUrl = "https://pokeapi.co/api/v2/pokemon/";
+import { apiUrl, renderEvolutionAPI } from "./main.mjs";
 
 
-    for (let i = 1; i <= 151; i++) {
-        fetch(apiUrl + i)
-            .then((response) => response.json())
-            .then(data => renderPokeCard(data))
-            .catch(error => console.error("Error fetching data:", error));
+export function showFavorites(pokeId) {
+    const favorites = localStorage.getItem('favoriteList') || [];
+
+    if (favorites.length = 0) {
+        //document.querySelector('.favoriteList').innerHTML =
+          //  '<p>click on the hearth to add a pokemon to your favorite!</p>';
+        console.log("a");
+        return;
     }
-
-export async function renderPokeCard(pokemon) {
-    let tipo = pokemon.types;
-    console.log(tipo);
-
-    const pokedex = document.getElementById("pokedex");
-    const card = document.createElement("div");
-
-    card.classList.add("pokemon_card");
-    card.innerHTML = `
-        <div class="pokemon_card">
-            <a href=#"><img class="favorite-icon" src="./images/icons8-favorite-48.png" alt="Favorite"></a>
-            <img src="${pokemon.sprites.front_default}" alt="${poke.name}">
-            <p class="id">#${poke.id}</p>
-            <h2 class="pkm_name">${poke.name}</h2>
-            <p class="pkm_type grass">${poke.type}</p>
-            <p class="pkm_type poison">Poison</p>
-        </div>
-    `;
-    pokedex.appendChild(card);
+    console.log("b");
+    //const favItem = favorite.map((item) => favoriteList(item));
+    //document.querySelector('.favoriteList').innerHTML = favItem.join('');
 }
 
-renderPokeCard();
+export function addFavorite(pokeId, key = "Pokemon id") {
+
+    const rawFavorites = localStorage.getItem('favoriteList') || [];
+    const favorites = JSON.parse(rawFavorites);
+
+    favorites.push(pokeId);
+
+    console.log(favorites);
+
+    localStorage.setItem("favoriteList", JSON.stringify(favorites));
+    console.log(localStorage);
+}
+
+export async function changesprite(pokemon, gender) {
+    const prof_img = document.querySelector(".prof_img");
+
+    if (gender === "m") {
+
+        prof_img.src = pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default;
+    } else if (gender === "f") {
+
+        let femaleSprite = pokemon.sprites.versions["generation-v"]["black-white"].animated.female_female;
+
+        if (femaleSprite != null) {
+
+            prof_img.src = pokemon.sprites.versions["generation-v"]["black-white"].animated.female_female;
+        }
+            
+        return;
+    }
+}

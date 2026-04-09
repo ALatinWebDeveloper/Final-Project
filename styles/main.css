@@ -22,16 +22,31 @@
 /*Pokemon types css*/
 .pkm_type {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 10px 15px;
     margin: 5px;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
 .grass {
     background-color: #78C850;
     color: white;
+}
+
+.normal {
+    background-color: #e8e8f5;
+    color: black;
+}
+
+.rock {
+    background-color: #4d3d32;
+    color: white;
+}
+
+.ice {
+    background-color: #7ea5ff;
+    color: black;
 }
 
 .poison {
@@ -69,7 +84,7 @@
     color: black;
 }
 
-.whater {
+.water {
     background-color: #6890F0;
     color: white;
 }
@@ -120,8 +135,19 @@ body {
     margin: 2% 5%;
     background-color: #ECECEC;
     display: grid;
-    grid-template: auto 99% / 65% 35%;
+    grid-template: auto 99% / 100% 0%;
     gap: 50px;
+    transition: grid-template .5s;
+}
+
+.profileOpened {
+
+    left: 66vw;
+}
+
+.mainCompresed {
+
+    grid-template: auto 99% / 65% 35%;
 }
 
 header {
@@ -171,26 +197,36 @@ main {
     flex-wrap: wrap;
 }
 
+@keyframes myAnimation {
+    from {grid-template: auto 99% / 100% 0%;}
+    to {grid-template: auto 99% / 65% 35%;}
+}
+
 .pokemon_card {
     border: 1px solid #ccc;
     border-radius: 30px;
-    padding: 2%;
+    padding: 1%;
     text-align: center;
     width: 30%;
     background-color: #FFFF;
     font-size: 1.1rem;
     box-shadow: #dadada 5px 10px 5px;
+    cursor: pointer;
 
     .favorite-icon {
         width: 40px;
-        float: right;
-        margin: 0;
+        margin-left: 80%;
+    }
+
+    .card_prof_img {
+        width: 50%;
+        height: auto;
     }
 
     img {
-        width: 80%;
-        margin: 0 10%;
-        height: auto;
+        display: flex;
+        width: 50%;
+        margin: 0 auto;
         border-radius: 10px;
     }
 
@@ -201,11 +237,11 @@ main {
     }
 }
 
-#pmk_profile {
+aside {
     position: fixed;
     width: 31vw;
-    left: 66vw;
-    top: 9vw;
+    left: 100vw;
+    top: 7vw;
     flex-wrap: wrap;
     align-content: center;
     flex-direction: row;
@@ -216,6 +252,8 @@ main {
     grid-area: 2 / 2;
     justify-content: center;
     height: fit-content;
+    transition: left .5s;
+
 
     p, .weakness {
         font-weight: bold;
@@ -231,8 +269,8 @@ main {
     }
 
     .profile_header {
-        width: 90%;
-        height: 50px;
+        width: fit-content;
+        height: 2vw;
     }
 
     .profile_body {
@@ -245,6 +283,11 @@ main {
         border-radius: 10px;
         position: fixed;
         bottom: 36vw;
+        right: 0vw;
+        transition: right 1s;
+    }
+
+    .prof_img_animation {
         right: 13vw;
     }
 
@@ -252,7 +295,6 @@ main {
         display: flex;
         justify-content: center;
         gap: 10px;
-        margin-top: 50px;
         flex-direction: column;
         float: right;
 
@@ -264,20 +306,22 @@ main {
             padding: 5px;
         }
 
-        .m {
+        .maleBtn{
             border-color: #47b5ff;
+            cursor: pointer;
         }
 
-        .f {
+        .femBtn {
             border-color: #ff9dea;
+            cursor: pointer;
         }
 
-        .m .focus {
+        .maleBtn .focus {
             background-color: #a8d9fa;
             border-color: #a8d9fa;
         }
 
-        .f .focus {
+        .femBtn .focus {
             background-color: #ffbbf0;
             border-color: #ffbbf0;
         }
@@ -297,6 +341,7 @@ main {
         background-color: var(--main-bg-color);
         display: inline-block;
         width: 44%;
+        margin-bottom: 10px;
     }
 
     .pkm_carac {
@@ -312,6 +357,7 @@ main {
         background-color: var(--main-bg-color);
         border-radius: 20px;
         padding: 5px;
+
         img {
             margin: 0 5px;
         }
