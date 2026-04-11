@@ -1,4 +1,4 @@
-import { apiUrl, renderEvolutionAPI } from "./main.mjs";
+import { apiUrl, renderPokeCard } from "./main.mjs";
 
 
 export function showFavorites(pokeId) {
@@ -45,4 +45,55 @@ export async function changesprite(pokemon, gender) {
             
         return;
     }
+}
+
+export async function filterType(pokemonType) {
+
+    const pokemon_card = document.querySelectorAll(".pokemon_card");
+    
+    pokemon_card.forEach(element => {
+
+        const hasType = element.querySelector(`.pkm_type.${pokemonType}`);
+
+        if (pokemonType === "all" || hasType) {
+            element.classList.remove("hide");
+            
+        } else {
+            element.classList.add("hide");
+        }
+    });
+
+
+
+    /*pokedex.innerHTML = "";
+
+    for (let i = 1; i <= 151; i++) {
+        fetch(apiUrl + i)
+            .then((response) => response.json())
+            .then(data => {
+
+                const types = data.types.map(type => type.type.name);
+                if (types.some(tipo => tipo.includes(pokemonType))) {
+                    renderPokeCard(data);
+                }
+            });
+    };
+
+    let typeBtn = await document.querySelectorAll(".pkm_type");
+    console.log(typeBtn);
+    typeBtn = Array.from(typeBtn);
+
+    console.log(typeBtn);
+
+    await typeBtn.forEach(element => {
+        element.addEventListener("click", function () {
+            console.log(element);
+
+            let filter_type = element.classList[1];
+            filterType(filter_type);
+        });
+    });
+
+
+    console.log("element");*/
 }

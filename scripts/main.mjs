@@ -1,8 +1,14 @@
-import { addFavorite, changesprite } from "./utils.mjs";
+import { addFavorite, changesprite, filterType } from "./utils.mjs";
 
 export const apiUrl = "https://pokeapi.co/api/v2/pokemon/";
 const apiEvolution = "https://pokeapi.co/api/v2/evolution-chain/";
 const pokedex = document.getElementById("pokedex");
+const filterAll = document.querySelector(".filterAll");
+
+filterAll.addEventListener("click", () => {
+    filterType("all");
+});
+console.log(filterAll);
 
 export async function renderEvolutionAPI(pokeId) {
     try {
@@ -26,31 +32,6 @@ export async function renderEvolutionAPI(pokeId) {
     }
 }
 
-/*
-async function getEvolution(pokeId, pokemon, data) {
-
-    console.log(data);
-    let currentStep = await data.evolution_chain.url;
-
-    while (currentStep) {
-
-        let evoInfo = await fetch(currentStep);
-        const info = await evoInfo.json();
-
-        const lvl = info.chain.evolves_to[0].evolution_details[0].min_level;
-        console.log(lvl);
-        //console.log(pokemon);
-    
-
-        let evolution = `
-            <img>${apiUrl + pokemon.sprites.other["official-artwork"].front_default}</img>
-            <p>${lvl}</p>`;
-
-        // Saltamos al siguiente nivel (asumiendo la primera opción de evolución)
-        return evolution;
-    }
-}*/
-
 async function renderAPI() {
 
     for (let i = 1; i <= 151; i++) {
@@ -59,6 +40,17 @@ async function renderAPI() {
             .then(data => renderPokeCard(data))
             .catch(error => console.error("Error fetching data:", error));
     }
+
+    let typeBtn = await document.querySelectorAll(".pkm_type");
+    typeBtn = Array.from(typeBtn);
+
+    typeBtn.forEach(element => {
+        element.addEventListener("click", function () {
+
+            let filter_type = element.classList[1];
+            filterType(filter_type);
+        });
+    });
 }
 
 
@@ -90,7 +82,7 @@ async function getType(pokemon)
     let type = await pokemon.types.map((type) =>
         `<p class="pkm_type ${type.type.name}">${(type.type.name).charAt(0).toUpperCase() + (type.type.name).slice(1)}</p>`);
     type = type.join('');
-
+    
     return type;
 }
 
@@ -102,9 +94,6 @@ async function getAbility(pokemon) {
     return ability;
 }
 
-async function getDebility(pokemon) {
-
-}
 async function getStats(pokemon) {
 
     let stats = [];
@@ -228,6 +217,5 @@ async function renderProfile(pokemon, pokeId) {
     //add the profile image an animation to enter when the user clicks on a pokemon
 
     const prof_img = document.querySelector(".prof_img");
-    console.log(prof_img);
     prof_img.classList.add("prof_img_animation");
 }

@@ -19,6 +19,7 @@
     display: flex;
 }
 
+
 /*Pokemon types css*/
 .pkm_type {
     display: inline-block;
@@ -27,6 +28,14 @@
     border-radius: 5px;
     font-size: 1.2rem;
     font-weight: bold;
+    cursor: pointer;
+    z-index: 1;
+    position: relative;
+}
+
+.pkm_type:hover {
+
+    scale: 1.05;
 }
 
 .grass {
@@ -141,7 +150,7 @@ body {
 }
 
 .profileOpened {
-
+    top: 13vw;
     left: 66vw;
 }
 
@@ -203,11 +212,11 @@ main {
 }
 
 .pokemon_card {
+    width: 30%;
     border: 1px solid #ccc;
     border-radius: 30px;
     padding: 1%;
     text-align: center;
-    width: 30%;
     background-color: #FFFF;
     font-size: 1.1rem;
     box-shadow: #dadada 5px 10px 5px;
@@ -235,6 +244,12 @@ main {
         margin: 10px 0;
 
     }
+}
+
+.pokemon_card:hover {
+    position: relative;
+    z-index: 1;
+    scale: 1.05;
 }
 
 aside {
@@ -268,35 +283,40 @@ aside {
         font-size: 1.1rem;
     }
 
-    .profile_header {
-        width: fit-content;
-        height: 2vw;
-    }
+    /*.profile_header {
+
+    }*/
 
     .profile_body {
         width: 100%;
     }
 
     .prof_img {
-        width: 200px;
-        height: auto;
-        border-radius: 10px;
-        position: fixed;
-        bottom: 36vw;
-        right: 0vw;
-        transition: right 1s;
+        width: 30%;
+        position: absolute;
+        animation: slideIn 1s;
+        right: 11vw;
+        bottom: 30vw;
     }
 
-    .prof_img_animation {
-        right: 13vw;
+    @keyframes slideIn {
+        from {
+                opacity: 0;
+            }
+        
+            to {
+                opacity: 1;
+                right: 13vw;
+            }
+        
     }
 
     .gender {
         display: flex;
         justify-content: center;
+        align-items: flex-end;
         gap: 10px;
         flex-direction: column;
-        float: right;
 
         img {
             width: 40px;
@@ -369,9 +389,11 @@ aside {
     .feature p, .evolution p {
         background-color: var(--main-bg-color);
     }
+
     .pkm_carac p {
         grid-area: 2;
     }
+
     .stats {
         display: flex;
         justify-content: space-evenly;
@@ -381,12 +403,14 @@ aside {
         background-color: var(--main-bg-color);
         border-radius: 40px;
         padding: 5px;
+
         h4 {
             background-color: #47b5ff;
             padding: 10px;
             border-radius: 50%;
             font-size: 1rem;
         }
+
         p {
             margin: 0;
             padding: 5px;
@@ -396,6 +420,7 @@ aside {
         display: flex;
         align-items: center;
         justify-content: space-evenly;
+
         img {
             width: 50px;
             margin: 10px;
