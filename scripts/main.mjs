@@ -151,10 +151,10 @@ async function renderProfile(pokemon, pokeId) {
             <div class="profile_header">
                 <img class="prof_img" src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
                 
-                <div class="gender">
+                <div class="playBtns">
                     <a class="closeBtn" href="#">X</a>
-                    <img class="maleBtn" src="./images/gender_imgm.png" alt="male">
-                    <img class="femBtn" src="./images/gender_imgf.png" alt="female">
+                    <img class="playBtn" src="./images/play.png" alt="male">
+                    <img class="stopBtn" src="./images/stop.png" alt="female">
                 </div>
             </div>
             <div class="profile_body">
@@ -222,11 +222,11 @@ async function renderProfile(pokemon, pokeId) {
     const genderFbtn = await document.querySelector(".femBtn");
 
     genderMbtn.addEventListener("click", function () {
-        changesprite(pokemon, "m");
+        changesprite(pokemon, "art-work");
     });
 
     genderFbtn.addEventListener("click", function (){
-        changesprite(pokemon, "f")
+        changesprite(pokemon, "sprite")
     });
 
     const prof_img = document.querySelector(".prof_img");

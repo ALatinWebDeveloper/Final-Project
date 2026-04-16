@@ -53,23 +53,19 @@ export function toggleFavorite(pokeId, favIcon) {
     console.log(localStorage);
 }
 
-export async function changesprite(pokemon, gender) {
+export async function changesprite(pokemon, imageType) {
     const prof_img = document.querySelector(".prof_img");
 
-    if (gender === "m") {
+    if (imageType === "art-work") {
 
         prof_img.src = pokemon.sprites.versions["generation-v"]["black-white"].animated.front_default;
-    } else if (gender === "f") {
+    } else {
 
-        let femaleSprite = pokemon.sprites.versions["generation-v"]["black-white"].animated.female_female;
-
-        if (femaleSprite != null) {
-
-            prof_img.src = pokemon.sprites.versions["generation-v"]["black-white"].animated.female_female;
-        }
+        prof_img.src = pokemon.sprites.other["official-artwork"].front_default;
+    }
             
         return;
-    }
+    
 }
 
 export async function filterType(pokemonType) {

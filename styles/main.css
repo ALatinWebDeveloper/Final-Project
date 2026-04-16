@@ -63,11 +63,6 @@
     color: white;
 }
 
-.dark {
-    background-color: #705848;
-    color: white;
-}
-
 .flying {
     background-color: #A890F0;
     color: white;
@@ -350,14 +345,14 @@ aside {
         
     }
 
-    .gender {
+    .playBtns {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 10px;
         flex-direction: row;
 
-        .maleBtn {
+        .playBtn {
             position: relative;
             left: 38%;
         }
@@ -381,22 +376,22 @@ aside {
             padding: 5px;
         }
 
-        .maleBtn{
+        .playBtn{
             border-color: #47b5ff;
             cursor: pointer;
         }
 
-        .femBtn {
+        .stopBtn {
             border-color: #ff9dea;
             cursor: pointer;
         }
 
-        .maleBtn .focus {
+        .playBtn .focus {
             background-color: #a8d9fa;
             border-color: #a8d9fa;
         }
 
-        .femBtn .focus {
+        .stopBtn .focus {
             background-color: #ffbbf0;
             border-color: #ffbbf0;
         }
