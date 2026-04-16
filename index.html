@@ -13,15 +13,33 @@
 <body>
     <header>
         <img src="./images/pokeLogo.png" alt="Logo" height="75px">
-        <input type="text" placeholder="Search...">
+        <div class="search-container">
+            <input type="text" id="pokemonName" placeholder="Busca un pokemon (ej: pika...)" autocomplete="off">
+            <div id="suggestions" class="suggestions-list hide"></div>
+        </div>
     </header>
     <main>
         <div class="filters">
-            <button>Placeholder</button>
-            <button>Placeholder</button>
-            <button>Placeholder</button>
-            <button>Placeholder</button>
-            <button class="filterAll">Remove</button>
+                <button class="pkm_type normal" id="normal">Normal</button>
+                <button class="pkm_type fire" id="fire">Fire</button>
+                <button class="pkm_type water" id="water">Water</button>
+                <button class="pkm_type grass" id="grass">Grass</button>
+                <button class="pkm_type electric" id="electric">Electric</button>
+                <button class="pkm_type ice" id="ice">Ice</button>
+                <button class="pkm_type fighting" id="fighting">Fighting</button>
+                <button class="pkm_type poison" id="poison">Poison</button>
+                <button class="pkm_type ground" id="ground">Ground</button>
+                <button class="pkm_type flying" id="flying">Flying</button>
+                <button class="pkm_type psychic" id="psychic">Psychic</button>
+                <button class="pkm_type bug" id="bug">Bug</button>
+                <button class="pkm_type rock" id="rock">Rock</button>
+                <button class="pkm_type ghost" id="ghost">Ghost</button>
+                <button class="pkm_type dark" id="dark">Dark</button>
+                <button class="pkm_type dragon" id="dragon">Dragon</button>
+                <button class="pkm_type steel" id="steel">Steel</button>
+                <button class="pkm_type fairy" id="fairy">Fairy</button>
+                <button class="favoriteFilter">Favorite</button>
+                <img class="filterAll" src="./images/clar_filters.png" alt="">
         </div>
         <div id="pokedex">
         </div>
@@ -74,7 +92,9 @@
             </div>
     </aside>
     <footer>
-        Hey
+        <h5>Created by Juan Betancourt - 2026</h5>
+        <p>Not affiliated with Nintendo or Game Freak, this is a practice project for learning purposes only. All rights to the
+        Pokémon franchise belong to their respective owners.</p>
     </footer>
     <script type="module" src="./scripts/main.mjs"></script>
 </body>

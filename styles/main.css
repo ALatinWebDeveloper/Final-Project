@@ -63,6 +63,11 @@
     color: white;
 }
 
+.dark {
+    background-color: #705848;
+    color: white;
+}
+
 .flying {
     background-color: #A890F0;
     color: white;
@@ -141,7 +146,6 @@
 /*Main layout css*/
 
 body {
-    margin: 2% 5%;
     background-color: #ECECEC;
     display: grid;
     grid-template: auto 99% / 100% 0%;
@@ -162,41 +166,75 @@ body {
 header {
     display: flex;
     justify-content: space-between;
-    margin: auto 0;
+    margin: 2% 5% 0 5%;
     grid-area: 1;
     align-items: center;
 
     input {
         padding: 20px;
-        width: 80%;
+        width: -webkit-fill-available;
         border-radius: 25px;
         border: none;
         box-shadow: 5px 5px 10px #ccc;
         font-weight: bolder;
         font-size: 1.1rem;
     }
+
+    .search-container {
+        width: 90%;
+    }
+
+    .suggestions-list {
+        display: none;
+        position: absolute;
+        background: white;
+        border: 1px solid #ccc;
+        width: 81%;
+        z-index: 1000;
+    }
+
+    .search-container:focus-within .suggestions-list:not(:empty) {
+        display: block;
+    }
+
+    .suggestion-item {
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+    }
 }
 
 main {
+    margin: 0 5% 0 5%;
     grid-area: 2 / 1;
 }
 
 .filters {
     display: flex;
     margin-bottom: 2%;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 
     button {
         padding: 15px;
         border-radius: 10px;
-        background-color: #FFFF;
         text-decoration: none;
         border: none;
+        min-width: 10%;
         box-shadow: #ccc 0px 1px 3px, #ccc 0px 1px 2px;
         cursor: pointer;
         font-weight: bolder;
         font-size: 1.1rem;
+        margin: 5px;
+    }
+
+    img {
+        height: 1%;
+        cursor: pointer;
     }
 }
 
@@ -223,8 +261,9 @@ main {
     cursor: pointer;
 
     .favorite-icon {
-        width: 40px;
+        width: 20%;
         margin-left: 80%;
+        cursor: pointer;
     }
 
     .card_prof_img {
@@ -313,10 +352,26 @@ aside {
 
     .gender {
         display: flex;
-        justify-content: center;
-        align-items: flex-end;
+        justify-content: space-between;
+        align-items: center;
         gap: 10px;
-        flex-direction: column;
+        flex-direction: row;
+
+        .maleBtn {
+            position: relative;
+            left: 38%;
+        }
+
+        .closeBtn {
+            display: flex;
+            text-decoration: none;
+            padding: 5px 10px;
+            width: fit-content;
+            background-color: aliceblue;
+            border: solid 2px black;
+            border-radius: 10px;
+        
+        }
 
         img {
             width: 40px;
@@ -433,4 +488,16 @@ footer{
     text-align: center;
     width: 100%;
     grid-area: 3 / span 2;
+    background-color: #3b3532;
+    color: white;
+    font-size: 1.1rem;
+    height: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+        p {
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
 }

@@ -1,29 +1,28 @@
-import { addFavorite, changesprite, filterType } from "./utils.mjs";
+import { toggleFavorite, changesprite, filterType, showFavoriteIcon, closeProfile, showFavorites, searchBar } from "./utils.mjs";
 
 export const apiUrl = "https://pokeapi.co/api/v2/pokemon/";
 const apiEvolution = "https://pokeapi.co/api/v2/evolution-chain/";
 const pokedex = document.getElementById("pokedex");
 const filterAll = document.querySelector(".filterAll");
+const favoriteFilter = document.querySelector(".favoriteFilter");
+
+const searchBtn = document.getElementById('searchBtn');
 
 filterAll.addEventListener("click", () => {
     filterType("all");
 });
-console.log(filterAll);
 
-export async function renderEvolutionAPI(pokeId) {
+export async function renderPokemon(pokeId) {
     try {
-        // 1. Obtenemos la especie para saber cuál es su cadena evolutiva
+        
         const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeId}/`);
         const speciesData = await speciesRes.json();
 
-        // 2. Usamos el link específico de esa familia (ej: la de Bulbasaur)
+        
         const evolutionUrl = speciesData.species.url;
 
         const evoRes = await fetch(evolutionUrl);
         const data = await evoRes.json();
-
-        // 3. Ahora sí, enviamos los datos reales a tu función
-        //await getEvolution(pokeId, pokemon, data);
 
         return data;
 
@@ -53,6 +52,10 @@ async function renderAPI() {
     });
 }
 
+favoriteFilter.addEventListener("click", function () {
+    showFavorites();
+});
+
 
 export async function renderPokeCard(pokemon) {
     const card = document.createElement("div");
@@ -61,7 +64,7 @@ export async function renderPokeCard(pokemon) {
 
     card.classList.add("pokemon_card");
     card.innerHTML = `
-            <img class="favorite-icon" src="./images/icons8-favorite-48.png" alt="Favorite">
+            <img class="favorite-icon" src="./images/notFavoriteIcon.png" alt="Favorite_icon">
             <img class="card_prof_img" src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
             <p class="id">#${pokemon.id}</p>
             <h2 class="pkm_name">${(pokemon.name).charAt(0).toUpperCase() + (pokemon.name).slice(1)}</h2>
@@ -71,9 +74,12 @@ export async function renderPokeCard(pokemon) {
 
     card.addEventListener("click", function () {
         renderProfile(pokemon, pokemon.id);
-        renderEvolutionAPI(pokemon.id, pokemon);
+        renderPokemon(pokemon.id, pokemon);
 
     });
+    const favbts = document.getElementsByClassName("favorite-icon");
+
+    showFavoriteIcon(pokemon.id, favbts[pokemon.id - 1]);
 }
 
 
@@ -116,7 +122,7 @@ async function getStats(pokemon) {
 
 async function getDescription(pokemon) {
     
-    let description = await renderEvolutionAPI(pokemon.id, pokemon);
+    let description = await renderPokemon(pokemon.id, pokemon);
 
     description = description.flavor_text_entries.find(element => element.language.name === "en" && element.version.name == "white");
 
@@ -124,6 +130,8 @@ async function getDescription(pokemon) {
 }
 
 renderAPI();
+searchBar(searchBtn);
+
 
 async function renderProfile(pokemon, pokeId) {
     const profile = document.querySelector(".pkm_profile");
@@ -142,7 +150,9 @@ async function renderProfile(pokemon, pokeId) {
     profile.innerHTML = `
             <div class="profile_header">
                 <img class="prof_img" src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
+                
                 <div class="gender">
+                    <a class="closeBtn" href="#">X</a>
                     <img class="maleBtn" src="./images/gender_imgm.png" alt="male">
                     <img class="femBtn" src="./images/gender_imgf.png" alt="female">
                 </div>
@@ -195,11 +205,17 @@ async function renderProfile(pokemon, pokeId) {
     
     //add events to the buttons
 
+    const closeBtn = document.querySelector(".closeBtn");
+    closeBtn.addEventListener("click", function () {
+        console.log("close button clicked");
+        closeProfile(profile, mainBody);
+    });
+
     const favbtns = await document.querySelectorAll(".favorite-icon");
     favbtns.forEach(element => {
-        element.addEventListener("click", function addFavoriteCaller () {
+        element.addEventListener("click", () => {
 
-            addFavorite(pokemon.id);
+            toggleFavorite(pokemon.id, favbtns[pokemon.id - 1]);
         });
     });
 

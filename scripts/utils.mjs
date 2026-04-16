@@ -1,28 +1,53 @@
 import { apiUrl, renderPokeCard } from "./main.mjs";
 
 
-export function showFavorites(pokeId) {
-    const favorites = localStorage.getItem('favoriteList') || [];
+export function showFavoriteIcon(pokeId, favIcon) {
+    const favorites = JSON.parse(localStorage.getItem('favoriteList')) || [];
+    const id = String(pokeId);
 
-    if (favorites.length = 0) {
-        //document.querySelector('.favoriteList').innerHTML =
-          //  '<p>click on the hearth to add a pokemon to your favorite!</p>';
-        console.log("a");
-        return;
+    if (favorites.includes(id)) {
+        favIcon.classList.add('isFavorite');
+        favIcon.src = "./images/favoriteIcon.png";
+    } else {
+        favIcon.classList.remove('isFavorite');
+        favIcon.src = "./images/notFavoriteIcon.png";
     }
-    console.log("b");
-    //const favItem = favorite.map((item) => favoriteList(item));
-    //document.querySelector('.favoriteList').innerHTML = favItem.join('');
 }
 
-export function addFavorite(pokeId, key = "Pokemon id") {
+export function showFavorites() {
 
-    const rawFavorites = localStorage.getItem('favoriteList') || [];
-    const favorites = JSON.parse(rawFavorites);
+    const pokeCards = document.querySelectorAll(".pokemon_card");
+    
+    pokeCards.forEach(element => {
 
-    favorites.push(pokeId);
+        const isFavorite = element.querySelector(`.isFavorite`);
 
-    console.log(favorites);
+        if (isFavorite) {
+            element.classList.remove("hide");
+
+        } else {
+            element.classList.add("hide");
+        }
+    });
+}
+
+export function toggleFavorite(pokeId, favIcon) {
+    const id = String(pokeId);
+
+    let favorites = JSON.parse(localStorage.getItem('favoriteList')) || [];
+    
+    const isFavorite = favorites.includes(id);
+
+    favIcon.classList.toggle("isFavorite");
+    
+    if (isFavorite) {
+        favorites = favorites.filter(favId => String(favId) !== id);
+        favIcon.src = "./images/notFavoriteIcon.png";
+    } else {
+
+        favorites.push(id);
+        favIcon.src = "./images/favoriteIcon.png";
+    }
 
     localStorage.setItem("favoriteList", JSON.stringify(favorites));
     console.log(localStorage);
@@ -62,38 +87,77 @@ export async function filterType(pokemonType) {
             element.classList.add("hide");
         }
     });
+}
 
+export function closeProfile(profile, mainBody) {
+        
+    profile.classList.remove("show", "hide");
+    profile.classList.remove("profileOpened");
+    mainBody.classList.remove("mainCompresed");
+}
 
+export async function searchBar(pokemonName) {
 
-    /*pokedex.innerHTML = "";
+    let pokemonList = []; // Aquí guardaremos todos los nombres
 
-    for (let i = 1; i <= 151; i++) {
-        fetch(apiUrl + i)
-            .then((response) => response.json())
-            .then(data => {
-
-                const types = data.types.map(type => type.type.name);
-                if (types.some(tipo => tipo.includes(pokemonType))) {
-                    renderPokeCard(data);
-                }
-            });
+    // 1. Al cargar la página, obtenemos todos los nombres de la API
+    window.onload = async () => {
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            pokemonList = data.results.map(p => p.name);
+        } catch (error) {
+            console.error("Error cargando lista:", error);
+        }
     };
 
-    let typeBtn = await document.querySelectorAll(".pkm_type");
-    console.log(typeBtn);
-    typeBtn = Array.from(typeBtn);
+    const input = document.getElementById('pokemonName');
+    const suggestionsContainer = document.getElementById('suggestions');
 
-    console.log(typeBtn);
+    // 2. Filtrar mientras el usuario escribe
+    input.addEventListener('input', () => {
+        const value = input.value.toLowerCase();
+        const suggestionsList = document.querySelector(".suggestions-list");
+        suggestionsContainer.innerHTML = ''; // Limpiar sugerencias anteriores
 
-    await typeBtn.forEach(element => {
-        element.addEventListener("click", function () {
-            console.log(element);
+        if (value.length < 2) {
+            
+            suggestionsList.classList.toggle("show", "hide");
+            return; // Empezar a sugerir tras 2 letras
+        }
 
-            let filter_type = element.classList[1];
-            filterType(filter_type);
+        const matches = pokemonList.filter(name => name.includes(value)).slice(0, 5); // Mostrar top 5
+
+        matches.forEach(match => {
+            const div = document.createElement('div');
+            div.textContent = match;
+            div.classList.add('suggestion-item');
+            div.onmousedown = () => {
+                input.value = match;
+                suggestionsContainer.innerHTML = '';
+                renderSearch(apiUrl + match); // Buscar automáticamente al hacer click
+            };
+            suggestionsContainer.appendChild(div);
         });
     });
 
+    // 3. Función de búsqueda (la misma de antes, pero reutilizable)
+    async function renderSearch(match)
+    {
+        const pokedex = document.getElementById('pokedex');
 
-    console.log("element");*/
+        pokedex.innerHTML = "";
+        try {
+            const response = await fetch(match);
+            console.log(match);
+            if (!response.ok) throw new Error("No encontrado");
+            const data = await response.json();
+
+            renderPokeCard(data);
+        } catch (err) {
+            alert("Pokémon no encontrado");
+        }
+    
+    }
+
 }
