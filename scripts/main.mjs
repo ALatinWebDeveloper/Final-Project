@@ -218,14 +218,14 @@ async function renderProfile(pokemon, pokeId) {
         });
     });
 
-    const genderMbtn = await document.querySelector(".maleBtn");
-    const genderFbtn = await document.querySelector(".femBtn");
+    const playbtn = await document.querySelector(".playBtn");
+    const stopbtn = await document.querySelector(".stopBtn");
 
-    genderMbtn.addEventListener("click", function () {
+    playbtn.addEventListener("click", function () {
         changesprite(pokemon, "art-work");
     });
 
-    genderFbtn.addEventListener("click", function (){
+    stopbtn.addEventListener("click", function (){
         changesprite(pokemon, "sprite")
     });
 
