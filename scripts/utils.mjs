@@ -98,9 +98,8 @@ export function closeProfile(profile, mainBody) {
 
 export async function searchBar(pokemonName) {
 
-    let pokemonList = []; // Aquí guardaremos todos los nombres
+    let pokemonList = [];
 
-    // 1. Al cargar la página, obtenemos todos los nombres de la API
     window.onload = async () => {
         try {
             const response = await fetch(apiUrl);
@@ -114,19 +113,18 @@ export async function searchBar(pokemonName) {
     const input = document.getElementById('pokemonName');
     const suggestionsContainer = document.getElementById('suggestions');
 
-    // 2. Filtrar mientras el usuario escribe
     input.addEventListener('input', () => {
         const value = input.value.toLowerCase();
         const suggestionsList = document.querySelector(".suggestions-list");
-        suggestionsContainer.innerHTML = ''; // Limpiar sugerencias anteriores
+        suggestionsContainer.innerHTML = '';
 
         if (value.length < 2) {
             
             suggestionsList.classList.toggle("show", "hide");
-            return; // Empezar a sugerir tras 2 letras
+            return;
         }
 
-        const matches = pokemonList.filter(name => name.includes(value)).slice(0, 5); // Mostrar top 5
+        const matches = pokemonList.filter(name => name.includes(value)).slice(0, 5);
 
         matches.forEach(match => {
             const div = document.createElement('div');
@@ -135,13 +133,12 @@ export async function searchBar(pokemonName) {
             div.onmousedown = () => {
                 input.value = match;
                 suggestionsContainer.innerHTML = '';
-                renderSearch(apiUrl + match); // Buscar automáticamente al hacer click
+                renderSearch(apiUrl + match);
             };
             suggestionsContainer.appendChild(div);
         });
     });
 
-    // 3. Función de búsqueda (la misma de antes, pero reutilizable)
     async function renderSearch(match)
     {
         const pokedex = document.getElementById('pokedex');

@@ -203,7 +203,6 @@ async function renderProfile(pokemon, pokeId) {
                 </div>
             `
     
-    //add events to the buttons
 
     const closeBtn = document.querySelector(".closeBtn");
     closeBtn.addEventListener("click", function () {
@@ -229,8 +228,6 @@ async function renderProfile(pokemon, pokeId) {
     genderFbtn.addEventListener("click", function (){
         changesprite(pokemon, "f")
     });
-
-    //add the profile image an animation to enter when the user clicks on a pokemon
 
     const prof_img = document.querySelector(".prof_img");
     prof_img.classList.add("prof_img_animation");
